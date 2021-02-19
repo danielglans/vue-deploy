@@ -18,12 +18,10 @@ rsync --progress -avzh \
 	--exclude='.git/' \
 	--exclude='.git*' \
 	--exclude='.editorconfig' \
-	--exclude='.styleci.yml' \
-	--exclude='.idea/' \
 	--exclude='Dockerfile' \
 	--exclude='readme.md' \
 	--exclude='README.md' \
-	--exclude='storage/oauth-*' \
+	--exclude='node_modules' \
 	-e "ssh -i /root/.ssh/id_rsa" \
 	--rsync-path="sudo rsync" . $1@$2:$3
 
@@ -34,8 +32,6 @@ then
 
 	ssh -i /root/.ssh/id_rsa -t $1@$2 "sudo chown -R $4:$4 $3"
 	ssh -i /root/.ssh/id_rsa -t $1@$2 "sudo chmod 775 -R $3"
-	ssh -i /root/.ssh/id_rsa -t $1@$2 "sudo chmod 777 -R $3/storage"
-	ssh -i /root/.ssh/id_rsa -t $1@$2 "sudo chmod 777 -R $3/public"
 
 	echo $'\n' "------ CONGRATS! DEPLOY SUCCESSFUL!!! ---------" $'\n'
 	exit 0
