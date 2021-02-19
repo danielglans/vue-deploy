@@ -23,6 +23,7 @@ rsync --progress -avzh \
 	--exclude='Dockerfile' \
 	--exclude='readme.md' \
 	--exclude='README.md' \
+	--exclude='storage/oauth-*' \
 	-e "ssh -i /root/.ssh/id_rsa" \
 	--rsync-path="sudo rsync" . $1@$2:$3
 
