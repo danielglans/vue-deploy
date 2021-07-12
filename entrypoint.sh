@@ -32,6 +32,14 @@ then
 
 	ssh -i /root/.ssh/id_rsa -t $1@$2 "sudo chown -R $4:$4 $3"
 	ssh -i /root/.ssh/id_rsa -t $1@$2 "sudo chmod 775 -R $3"
+	
+	if [ $6 ]
+	then
+	echo $'\n' "------ RELOAD LIGHTSPEED -------------------" $'\n'
+	
+	ssh -i /root/.ssh/id_rsa -t $1@$2 "/root/.brighthub/brighthub.sh web-restart"
+	
+	fi
 
 	echo $'\n' "------ CONGRATS! DEPLOY SUCCESSFUL!!! ---------" $'\n'
 	exit 0
